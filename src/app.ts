@@ -3,6 +3,9 @@ import express from "express";
 import { main } from "./db/conn";
 dotenv.config();
 
+const externalIP = process.env.RENDER_EXTERNAL_IP;
+console.log("oiii",externalIP);
+
 const app = express();
 const port = 3333;
 

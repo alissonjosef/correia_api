@@ -27,8 +27,7 @@ const productSchema = new Schema(
     modelos: {
       type: String,
       required: [true, " Campo obrigatório"],
-      enum: ["MASCULINO", "FEMENINO"],
-      default: "DISPONIVEL",
+      enum: ["MASCULINO", "FEMENINO"]
     },
   },
   { timestamps: true }
