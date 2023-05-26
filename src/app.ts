@@ -12,6 +12,7 @@ const port = 3333;
 app.use(cors());
 
 app.use(express.json());
+app.use('/uploads', express.static('uploads'));
 
 app.use((_req, res, next) => {
   res.header("Access-Control-Allow-Origin", "*");
@@ -29,5 +30,4 @@ app.get("/", (req, res) => {
 });
 
 app.listen(port, () => {
-  console.log(`🚀 Servidor rodando na porta http://localhost:${port}`);
 });
