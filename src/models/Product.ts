@@ -21,9 +21,15 @@ const productSchema = new Schema(
       required: true,
     },
     enabled: {
-        type: Boolean,
-        default: true,
-      },
+      type: Boolean,
+      default: true,
+    },
+    modelos: {
+      type: String,
+      required: [true, " Campo obrigatório"],
+      enum: ["MASCULINO", "FEMENINO"],
+      default: "DISPONIVEL",
+    },
   },
   { timestamps: true }
 );

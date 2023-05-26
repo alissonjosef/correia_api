@@ -19,6 +19,7 @@ export const serviceController = {
         price: req.body.price,
         imageUrl,
         enabled: req.body.enabled,
+        modelos: req.body.modelos
       };
 
       const response = await ProductModel.create(product);
