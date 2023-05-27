@@ -4,9 +4,6 @@ import { main } from "./db/conn";
 const cors = require("cors");
 dotenv.config();
 
-const externalIP = process.env.RENDER_EXTERNAL_IP;
-console.log("oiii", externalIP);
-
 const app = express();
 const port = 3333;
 app.use(cors());
