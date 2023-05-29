@@ -6,6 +6,15 @@ const url = require("url");
 
 export const serviceController = {
   create: async (req: any, res: any) => {
+    if (
+      !req.file ||
+      !req.body.name ||
+      !req.body.description ||
+      !req.body.price ||
+      !req.body.modelos
+    ) {
+      return res.status(404).json({ msg: "Campos vazios" });
+    }
     try {
       const serverUrl = `${req.protocol}://${req.headers.host}`;
 
@@ -19,7 +28,7 @@ export const serviceController = {
         price: req.body.price,
         imageUrl,
         enabled: req.body.enabled,
-        modelos: req.body.modelos
+        modelos: req.body.modelos,
       };
 
       const response = await ProductModel.create(product);
