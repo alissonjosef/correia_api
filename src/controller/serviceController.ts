@@ -78,13 +78,15 @@ export const serviceController = {
     const updatedProduct = req.body;
 
     try {
-      const serverUrl = `${req.protocol}://${req.headers.host}`;
+     /*  const serverUrl = `${req.protocol}://${req.headers.host}`;
 
       let imageUrl = "";
       if (req.file) {
         const imagePath = req.file.path;
         imageUrl = url.resolve(serverUrl, imagePath);
-      }
+      } */
+
+      const imagePath = req.file.location;
 
       const result = await ProductModel.updateOne(
         {
@@ -93,7 +95,7 @@ export const serviceController = {
         {
           $set: {
             ...updatedProduct,
-            imageUrl: imageUrl || updatedProduct.imageUrl,
+            imageUrl: imagePath || updatedProduct.imageUrl,
           },
         }
       );
