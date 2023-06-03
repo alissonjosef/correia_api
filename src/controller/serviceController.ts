@@ -1,8 +1,8 @@
 import { ObjectId } from "mongodb";
+const url = require("url");
+const { Product: ProductModel } = require("../models/Product");
 
 //const Picture = require("../models/Picture");
-const { Product: ProductModel } = require("../models/Product");
-const url = require("url");
 
 export const serviceController = {
   create: async (req: any, res: any) => {
@@ -18,15 +18,15 @@ export const serviceController = {
     try {
       const serverUrl = `${req.protocol}://${req.headers.host}`;
 
-      const imagePath = req.file.path;
+      const imagePath = req.file.location;
 
-      const imageUrl = url.resolve(serverUrl, imagePath);
+      /* const imageUrl = url.resolve(serverUrl, imagePath); */
 
       const product = {
         name: req.body.name,
         description: req.body.description,
         price: req.body.price,
-        imageUrl,
+        imageUrl: imagePath,
         enabled: req.body.enabled,
         modelos: req.body.modelos,
       };
