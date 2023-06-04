@@ -24,9 +24,18 @@ export const loginController = {
       }
 
       // Gere um token JWT
-      const token = jwt.sign({ userId: user._id }, process.env.JWT_SECRET, {
-        expiresIn: "1h",
-      });
+      const token = jwt.sign(
+        {
+          userId: user._id,
+          name: user.name,
+          email: user.email,
+          imgAvatar: user.imgAvatar,
+        },
+        process.env.JWT_SECRET,
+        {
+          expiresIn: "1h",
+        }
+      );
 
       // Envie o token para o cliente
       res.json({ token });
@@ -37,7 +46,7 @@ export const loginController = {
   },
 
   register: async (req: any, res: any) => {
-    const { email, password } = req.body;
+    const { email, password, name, imgAvatar } = req.body;
 
     try {
       // Verifique se o usuário já está registrado
@@ -50,12 +59,26 @@ export const loginController = {
       const hashedPassword = await bcrypt.hash(password, 10);
 
       // Crie o novo usuário no banco de dados
-      const newUser = await User.create({ email, password: hashedPassword });
+      const newUser = await User.create({
+        name,
+        imgAvatar,
+        email,
+        password: hashedPassword,
+      });
 
       // Gere um token JWT
-      const token = jwt.sign({ userId: newUser._id }, process.env.JWT_SECRET, {
-        expiresIn: "1h",
-      });
+      const token = jwt.sign(
+        {
+          userId: newUser._id,
+          name: newUser.name,
+          email: newUser.email,
+          imgAvatar: newUser.imgAvatar,
+        },
+        process.env.JWT_SECRET,
+        {
+          expiresIn: "1h",
+        }
+      );
 
       // Envie o token para o cliente
       res.json({ token });
