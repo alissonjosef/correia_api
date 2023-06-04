@@ -78,7 +78,7 @@ export const serviceController = {
     const updatedProduct = req.body;
 
     try {
-     /*  const serverUrl = `${req.protocol}://${req.headers.host}`;
+      /*  const serverUrl = `${req.protocol}://${req.headers.host}`;
 
       let imageUrl = "";
       if (req.file) {
@@ -86,17 +86,19 @@ export const serviceController = {
         imageUrl = url.resolve(serverUrl, imagePath);
       } */
 
-      const imagePath = req.file.location;
+      const imagePath = req.file ? req.file.location : undefined;
+
+      const updateData = {
+        ...updatedProduct,
+        imageUrl: imagePath || updatedProduct.imageUrl,
+      };
 
       const result = await ProductModel.updateOne(
         {
           _id: new ObjectId(productId),
         },
         {
-          $set: {
-            ...updatedProduct,
-            imageUrl: imagePath || updatedProduct.imageUrl,
-          },
+          $set: updateData,
         }
       );
 
