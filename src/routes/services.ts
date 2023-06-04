@@ -14,6 +14,9 @@ router.route("/register").post((req: any, res: any) => {
   loginController.register(req, res);
 });
 
+router.route("/user/profile").get(authenticate, (req: any, res: any) => {
+  loginController.profile(req, res);
+});
 router.route("/product").get((req: any, res: any) => {
   serviceController.getAll(req, res);
 });

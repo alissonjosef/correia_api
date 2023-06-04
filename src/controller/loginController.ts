@@ -87,4 +87,23 @@ export const loginController = {
       res.status(500).json({ message: "Erro no servidor" });
     }
   },
+
+  profile: async (req: any, res: any) => {
+    try {
+      const userId = req.userId;
+
+      const user = await User.findById(userId);
+
+      if (!user) {
+        return res.status(404).json({ message: "Usuário não encontrado" });
+      }
+
+      const { name, email, imgAvatar } = user;
+
+      res.json({ name, email, imgAvatar });
+    } catch (error) {
+      console.log("Erro ao obter informações do usuário:", error);
+      res.status(500).json({ message: "Erro ao obter informações do usuário" });
+    }
+  },
 };
