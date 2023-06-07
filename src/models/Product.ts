@@ -27,7 +27,7 @@ const productSchema = new Schema(
     modelos: {
       type: String,
       required: [true, " Campo obrigatório"],
-      enum: ["MASCULINO", "FEMENINO"]
+      enum: ["SAIA", "CAMISAS", "SHORT", "CINTO", "SANDALIA", "BOLSA" ]
     },
   },
   { timestamps: true }
