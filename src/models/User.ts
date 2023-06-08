@@ -20,6 +20,12 @@ const userSchema = new Schema({
     type: String,
     required: [true, "Nome do usuario é um campo obrigatório"],
   },
+  profile: {
+    type: String,
+    enum: ["ADMIN", "USER"],
+    /* required: [true, "Campo obrigatório"], */
+    default: "USER"
+  },
 });
 
 const User = mongoose.model("User", userSchema);

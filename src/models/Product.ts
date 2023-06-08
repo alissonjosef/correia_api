@@ -22,7 +22,7 @@ const productSchema = new Schema(
     },
     enabled: {
       type: Boolean,
-      default: true,
+      default: false,
     },
     modelos: {
       type: String,

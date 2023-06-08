@@ -30,6 +30,7 @@ export const loginController = {
           name: user.name,
           email: user.email,
           imgAvatar: user.imgAvatar,
+          profile: user.profile,
         },
         process.env.JWT_SECRET,
         {
@@ -46,7 +47,7 @@ export const loginController = {
   },
 
   register: async (req: any, res: any) => {
-    const { email, password, name, imgAvatar } = req.body;
+    const { email, password, name, imgAvatar, profile } = req.body;
 
     try {
       // Verifique se o usuário já está registrado
@@ -64,6 +65,7 @@ export const loginController = {
         imgAvatar,
         email,
         password: hashedPassword,
+        profile
       });
 
       // Gere um token JWT
@@ -73,6 +75,7 @@ export const loginController = {
           name: newUser.name,
           email: newUser.email,
           imgAvatar: newUser.imgAvatar,
+          profile: newUser.profile,
         },
         process.env.JWT_SECRET,
         {
