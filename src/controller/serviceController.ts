@@ -7,26 +7,27 @@ const { Product: ProductModel } = require("../models/Product");
 export const serviceController = {
   create: async (req: any, res: any) => {
     if (
-      !req.file ||
+      !req.files ||
+      req.files.length === 0 ||
       !req.body.name ||
       !req.body.description ||
       !req.body.price ||
       !req.body.modelos
     ) {
-      return res.status(404).json({ msg: "Campos vazios" });
+      return res.status(400).json({ msg: "Campos vazios" });
     }
     try {
       const serverUrl = `${req.protocol}://${req.headers.host}`;
 
-      const imagePath = req.file.location;
-
+      /* const imagePath = req.file.location; */
+      const imageUrl = req.files.map((file: any) => file.location);
       /* const imageUrl = url.resolve(serverUrl, imagePath); */
 
       const product = {
         name: req.body.name,
         description: req.body.description,
         price: req.body.price,
-        imageUrl: imagePath,
+        imageUrl: imageUrl,
         enabled: req.body.enabled,
         modelos: req.body.modelos,
       };
@@ -36,6 +37,7 @@ export const serviceController = {
       res.status(200).json({ response, msg: "Pedido criado com sucesso!" });
     } catch (error) {
       console.log("🚀 Erro ao fazer acriação", error);
+      res.status(500).json({ msg: "Erro ao criar o produto" });
     }
   },
 
@@ -90,7 +92,7 @@ export const serviceController = {
 
       const updateData = {
         ...updatedProduct,
-        imageUrl: imagePath || updatedProduct.imageUrl,
+        imageUrl: imagePath ? [imagePath] : updatedProduct.imageUrl,
       };
 
       const result = await ProductModel.updateOne(

@@ -30,7 +30,7 @@ router.route("/product").get((req: any, res: any) => {
 
 router
   .route("/product")
-  .post(upload.single("imageUrl"), authenticate, async (req: any, res: any) => {
+  .post(upload.array("imageUrl", 5), authenticate, async (req: any, res: any) => {
     serviceController.create(req, res);
   });
 

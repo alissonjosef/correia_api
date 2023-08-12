@@ -17,7 +17,7 @@ const productSchema = new Schema(
       required: true,
     },
     imageUrl: {
-      type: String,
+      type: [String],
       required: true,
     },
     enabled: {
@@ -27,7 +27,20 @@ const productSchema = new Schema(
     modelos: {
       type: String,
       required: [true, " Campo obrigatório"],
-      enum: ["SAIA", "CAMISAS", "SHORT", "CINTO", "SANDALIA", "BOLSA" ]
+      enum: [
+        "SAIA",
+        "CAMISAS",
+        "SHORT",
+        "CINTO",
+        "SANDALIA",
+        "BOLSA",
+        "MACAQUINHO",
+        "BODY",
+        "CASACO",
+        "CONJUNTO",
+        "VESTIDO",
+        "BLUSA",
+      ],
     },
   },
   { timestamps: true }
