@@ -43,7 +43,7 @@ export const serviceController = {
 
   getAll: async (req: any, res: any) => {
     try {
-      const product = await ProductModel.find();
+      const product = await ProductModel.find().sort({ createdAt: -1 });
 
       res.status(200).json(product);
     } catch (error) {
